@@ -4,3 +4,7 @@ export interface UserRegisterI{
     password: string;
 }
 
+export interface LoginI {
+    email: string;
+    password: string;
+}

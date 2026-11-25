@@ -1,6 +1,6 @@
 import connectDB from "@/lib/mongodb";
 import User from "@/models/User";
-import { UserRegisterI } from "@/types/UserT";
+import { UserRegisterI } from "@/types/Auth";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
@@ -26,9 +26,6 @@ export async function POST(req: Request) {
     password: hashedPassword,
     email: validEmail,
   });
-  console.log("Document ID:", newUser._id);
-  console.log("Database:", newUser.db.name);
-  console.log("Collection:", newUser.collection.name);
 
   return NextResponse.json(
     {

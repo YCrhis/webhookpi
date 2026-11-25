@@ -2,7 +2,7 @@
 
 import { onChangeHandler } from "@/helpers/handlers";
 import { PostCall } from "@/helpers/PostCall";
-import { UserRegisterI } from "@/types/UserT";
+import { UserRegisterI } from "@/types/Auth";
 import { FormEvent, useState } from "react";
 
 const defaultForm: UserRegisterI = {
@@ -22,8 +22,7 @@ export default function RegisterPage() {
 
   return (
     <section>
-        Hola mundo
-      <form onSubmit={handleCreateUser}>
+      <form onSubmit={handleCreateUser} className="flex flex-col gap-3">
         <input
           type="text"
           onChange={(e) =>
