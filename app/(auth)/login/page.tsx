@@ -3,7 +3,6 @@
 import Hooky from "@/components/molecules/Hooky";
 import UIButton from "@/components/UI/UIButton";
 import UIInput from "@/components/UI/UIInput";
-import { GetCall } from "@/helpers/GetCall";
 import { onChangeHandler } from "@/helpers/handlers";
 import { PostCall } from "@/helpers/PostCall";
 import { LoginI } from "@/types/Auth";
