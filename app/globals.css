@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --background: #0b090b;
+  --surface: #121013;
+  --surface-elevated: #1b171b;
+  --surface-hover: #211c21;
+
+  /* Borders */
+  --border: #2b252b;
+  --border-strong: #3a323a;
+
+  /* Text */
+  --foreground: #f5f2f5;
+  --muted: #969099;
+  --muted-foreground: #6f6872;
+
+  /* Brand */
+  --primary: #f28b36;
+  --primary-hover: #ff9d4d;
+  --primary-foreground: #1b1008;
+  --primary-soft: #3a2417;
+
+  /* Status */
+  --success: #4ade80;
+  --success-soft: #14291c;
+
+  --error: #f87171;
+  --error-soft: #301819;
+
+  --warning: #fbbf24;
+  --warning-soft: #302716;
+
+  --info: #60a5fa;
+  --info-soft: #172638;
+
+  /* Radius */
+  --radius: 0.75rem;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-hover: var(--surface-hover);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  --color-error: var(--error);
+  --color-error-soft: var(--error-soft);
+
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --radius-card: var(--radius);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@keyframes float-star {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(12deg);
+    opacity: 1;
+  }
+}
+
+.animate-float-star {
+  animation: float-star 3s ease-in-out infinite;
 }

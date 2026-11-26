@@ -4,6 +4,11 @@ export interface UserRegisterI{
     password: string;
 }
 
+export interface ValidationError {
+  field: string;
+  message: string;
+}
+
 export interface LoginI {
     email: string;
     password: string;
