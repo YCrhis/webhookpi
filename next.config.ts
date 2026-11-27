@@ -5,6 +5,9 @@ const nextConfig: NextConfig = {
   experimental: {
     agentFeedback: true,
   },
+  allowedDevOrigins: [
+    "unplug-revival-trekker.ngrok-free.dev",
+  ],
   cacheComponents: true,
   partialPrefetching: true,
   turbopack: {

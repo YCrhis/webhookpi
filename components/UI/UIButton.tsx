@@ -105,6 +105,7 @@ export default function UIButton({
         inline-flex items-center justify-center
         font-semibold whitespace-nowrap
         outline-none select-none
+        cursor-pointer
         transition-all duration-200
         active:scale-[0.98]
         focus-visible:ring-2
