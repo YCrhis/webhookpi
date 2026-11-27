@@ -6,9 +6,11 @@ import UIInput from "@/components/UI/UIInput";
 import { onChangeHandler } from "@/helpers/handlers";
 import { PostCall } from "@/helpers/PostCall";
 import { validateRegister } from "@/helpers/validations";
+import { useUserStore } from "@/providers/UserProvider";
 import { UserRegisterI } from "@/types/Auth";
 import { ArrowRight, Webhook } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
 
@@ -18,14 +20,17 @@ const defaultForm: UserRegisterI = {
   password: "",
 };
 export default function RegisterPage() {
+  const { login } = useUserStore((state) => state);
+  const router = useRouter();
+
   const [userForm, setUserForm] = useState<UserRegisterI>(defaultForm);
+  const [loading, setLoading] = useState(false);
 
   const handleCreateUser = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const validationErrors = validateRegister(userForm);
 
-    console.log(validationErrors, ' validationErrors')
     if (validationErrors.length > 0) {
       validationErrors.forEach((element) => {
         toast.error(element.message);
@@ -34,8 +39,14 @@ export default function RegisterPage() {
     }
 
     const response = await PostCall({ url: "/auth/register", data: userForm });
-    console.log(response);
-    console.log("passamos");
+    if (response.success) {
+      login(response.data);
+      setLoading(false);
+      router.push("/in");
+      return;
+    }
+    setLoading(false);
+    toast.error(response.message);
   };
 
   return (
@@ -169,6 +180,7 @@ export default function RegisterPage() {
               type="submit"
               variant="primary"
               size="lg"
+              loading={loading}
               fullWidth
               rightIcon={<ArrowRight size={16} />}
             >

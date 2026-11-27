@@ -15,7 +15,10 @@ export async function POST(req: Request) {
   const userExist = await User.findOne({ email: validEmail });
 
   if (userExist) {
-    throw new Error("The user already exist");
+    return NextResponse.json({
+      success: false,
+      message: "User already exist"
+    }, {status: 401})
   }
 
   /* hashing password */
@@ -29,7 +32,7 @@ export async function POST(req: Request) {
 
   return NextResponse.json(
     {
-      sucesss: true,
+      success: true,
       message: "User registered successfully",
       data: {
         name: newUser.name,

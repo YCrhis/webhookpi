@@ -5,9 +5,13 @@ import UIButton from "@/components/UI/UIButton";
 import UIInput from "@/components/UI/UIInput";
 import { onChangeHandler } from "@/helpers/handlers";
 import { PostCall } from "@/helpers/PostCall";
+import { useUserStore } from "@/providers/UserProvider";
 import { LoginI } from "@/types/Auth";
-import { ArrowRight, Link, Mail, Webhook } from "lucide-react";
+import { ArrowRight, Mail, Webhook } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 const defaultForm: LoginI = {
   password: "",
@@ -15,19 +19,25 @@ const defaultForm: LoginI = {
 };
 
 export default function LoginPage() {
+  const { login } = useUserStore((state) => state);
+  const router = useRouter();
+
   const [loginForm, setLoginForm] = useState<LoginI>(defaultForm);
   const [loading, setLoading] = useState(false);
 
   const handleSend = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const data = await PostCall({ url: "/auth/login", data: loginForm });
-    console.log(data);
+    if (data.success) {
+      login(data.data);
+      setLoading(false);
+      router.push("/in");
+      return;
+    }
+    setLoading(false);
+    toast.error(data.message);
   };
-
-  
-
-  // Keep your existing loginForm, setLoginForm,
-  // handleSend and onChangeHandler logic here.
 
   return (
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-4 py-12 text-foreground">
@@ -139,8 +149,6 @@ export default function LoginPage() {
                   })
                 }
               />
-
-             
             </div>
 
             {/* Submit */}
